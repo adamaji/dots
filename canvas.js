@@ -1,3 +1,34 @@
+function Player(){
+	this.init = function(xpos, ypos){
+		this.x = xpos;
+		this.y = ypos;
+
+		document.addEventListener('keydown', function(event){
+			if (event.keyCode == window.keys.LEFT_ARROW){
+				this.x -= 1;
+			}
+			else if (event.keyCode == window.keys.RIGHT_ARROW){
+				this.x += 1;
+			}
+			if (event.keyCode == window.keys.UP_ARROW){
+				this.y -= 1;
+
+			}
+			else if (event.keyCode == window.keys.DOWN_ARROW){
+				this.y += 1;
+			}
+		});		
+	}
+
+	this.render = function(){
+		context.beginPath();
+		context.arc(this.x,this.y,10,0,2*Math.PI);
+		context.fill();
+		context.closePath();
+	}
+
+}
+
 function Scene(){
 
 	this.init = function(){
@@ -6,29 +37,11 @@ function Scene(){
 
 		resize();
 
-		document.addEventListener('keydown', function(event){
-			if (event.keyCode == window.keys.LEFT_ARROW){
-				//left
-				alert("left");
-			}
-			else if (event.keyCode == window.keys.RIGHT_ARROW){
-				//right
-				alert("right");
-			}
-			if (event.keyCode == window.keys.UP_ARROW){
-				//up
-				alert("up");
-			}
-			else if (event.keyCode == window.keys.DOWN_ARROW){
-				//down
-				alert("down");
-			}
-		});
+		var newPlayer = new Player();
+		newPlayer.init(10,10);
 
-		context.beginPath();
-		context.arc(10,10,10,0,2*Math.PI);
-		context.fill();
-		context.closePath();
+		setInterval(newPlayer.render(), 30);
+
 	}
 
 	resize = function(){
