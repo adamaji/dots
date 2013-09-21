@@ -20,3 +20,6 @@ function Scene(){
 		canvas.height = height;
 	}
 }
+
+var newScene = new Scene();
+newScene.init();
