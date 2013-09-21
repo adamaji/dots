@@ -2,6 +2,8 @@ function Player(){
 	this.init = function(xpos, ypos){
 		this.x = xpos;
 		this.y = ypos;
+		this.xvel = 0;
+		this.yvel = 0;
 	}
 
 	this.render = function(ctx){
@@ -13,17 +15,37 @@ function Player(){
 
 	this.update = function(ctx, keys){
 		if (keys.indexOf(window.keys.LEFT_ARROW) > -1){
-			this.moveX(-1);
+			//this.moveX(-1);
+			this.xvel += -1;
 		}
 		else if (keys.indexOf(window.keys.RIGHT_ARROW) >  -1){
-			this.moveX(1);
+			//this.moveX(1);
+			this.xvel += 1;
 		}
 		if (keys.indexOf(window.keys.UP_ARROW) > -1){
-			this.moveY(-1);
+			//this.moveY(-1);
+			this.yvel += -1;
 		}
 		else if (keys.indexOf(window.keys.DOWN_ARROW) >  -1){
-			this.moveY(1);
+			//this.moveY(1);
+			this.yvel += 1;
 		}
+
+		if (this.xvel > 7){
+			this.xvel = 7;
+		}
+		else if (this.xel < 0){
+			this.xvel = 0;
+		}
+		if (this.yvel > 7){
+			this.yvel = 7;
+		}
+		else if (this.yvel < 0){
+			this.yvel = 0;
+		}
+		
+		this.x += this.xvel;
+		this.y += this.yvel;
 		this.render(ctx);
 	}
 
@@ -55,39 +77,11 @@ function Scene(){
 		players.push(newPlayer);
 
 		document.addEventListener('keydown', function(event){
-			/*if (event.keyCode == window.keys.LEFT_ARROW){
-				//newPlayer.moveX(-5);
-				pressed.push(window.keys.LEFT_ARROW);
-			}
-			else if (event.keyCode == window.keys.RIGHT_ARROW){
-				//newPlayer.moveX(5);
-				pressed.push(window.keys.RIGHT_ARROW);
-			}
-			else if (event.keyCode == window.keys.UP_ARROW){
-				//newPlayer.moveY(-5);
-				pressed.push(window.keys.UP_ARROW);
-			}
-			else if (event.keyCode == window.keys.DOWN_ARROW){
-				//newPlayer.moveY(5);
-				pressed.push(window.keys.DOWN_ARROW);
-			}*/
 			if (pressed.indexOf(event.keyCode) == -1){
 				pressed.push(event.keyCode)
 			}
 		});
 		document.addEventListener('keyup', function(event){
-			/*if (event.keyCode == window.keys.LEFT_ARROW){
-				pressed.splice(pressed.indexOf(window.keys.LEFT_ARROW),1);
-			}
-			else if (event.keyCode == window.keys.RIGHT_ARROW){
-				pressed.splice(pressed.indexOf(window.keys.RIGHT_ARROW),1);
-			}
-			else if (event.keyCode == window.keys.UP_ARROW){
-				pressed.splice(pressed.indexOf(window.keys.UP_ARROW),1);
-			}
-			else if (event.keyCode == window.keys.DOWN_ARROW){
-				pressed.splice(pressed.indexOf(window.keys.DOWN_ARROW),1);
-			}*/
 			pressed.splice(pressed.indexOf(event.keyCode));
 		});					
 
