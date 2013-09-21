@@ -1,4 +1,5 @@
-var host = process.env.HOST, port = 8080;
+//var host = process.env.HOST, port = 8080;
+var host = "127.0.0.1", port = 8080;
 var app = require('http').createServer()
 	, io = require('socket.io').listen(app);
 
