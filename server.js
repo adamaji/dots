@@ -11,7 +11,7 @@ io.configure(function () {
 });
 
 function handler(req, res) {
-	res.writeHead(200, {'Content-Type': 'text/html'});
+	res.writeHead(200, {'Content-Type': 'text/javascript'});
 	res.end(fs.readFileSync("index.html"));
 }
 
