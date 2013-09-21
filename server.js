@@ -12,7 +12,8 @@ io.configure(function () {
 
 function handler(req, res) {
 	res.writeHead(200);
-	res.end(fs.readFileSync("index.html"));
+	//res.end(fs.readFileSync("index.html"));
+	res.end("hello sockets");
 }
 
 socket.emit('log', {
