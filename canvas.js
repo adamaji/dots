@@ -13,7 +13,7 @@ function Player(){
 
 	this.moveX = function(x){
 		this.x += x;
-		alert("move");
+		alert(this.x);
 	}
 
 	this.moveY = function(y){
@@ -36,7 +36,6 @@ function Scene(){
 		document.addEventListener('keydown', function(event){
 			if (event.keyCode == window.keys.LEFT_ARROW){
 				newPlayer.moveX(-1);
-				alert("left");
 			}
 			else if (event.keyCode == window.keys.RIGHT_ARROW){
 				newPlayer.moveX(1);
