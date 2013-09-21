@@ -7,17 +7,13 @@ function Scene(){
 		resize();
 
 		context.beginPath();
-		context.arc(10,10,5,0,2*Math.PI);
-		context.fill();
+		context.arc(10,10,10,0,2*Math.PI);
 		context.closePath();
 	}
 
 	resize = function(){
-		width = window.innerWidth;
-		height = window.innerHeight;
-
-		canvas.width = width;
-		canvas.height = height;
+		canvas.width = 500;
+		canvas.height = 500;
 	}
 }
 
