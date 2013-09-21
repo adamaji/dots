@@ -13,7 +13,6 @@ function Player(){
 
 	this.moveX = function(x){
 		this.x += x;
-		alert(this.x);
 	}
 
 	this.moveY = function(y){
@@ -28,10 +27,13 @@ function Scene(){
 		canvas = document.getElementById("scene");
 		context = canvas.getContext('2d');
 
+		players = [];
+
 		resize();
 
 		var newPlayer = new Player();
 		newPlayer.init(10,10);
+		players.push(newPlayer);
 
 		document.addEventListener('keydown', function(event){
 			if (event.keyCode == window.keys.LEFT_ARROW){
@@ -48,8 +50,14 @@ function Scene(){
 			}
 		});		
 
-		setInterval(newPlayer.render(), 30);
+		setInterval(update, 30);
 
+	}
+
+	update = function(){
+		for (var i=0; i<players.length; i++){
+			players[i].render();
+		}
 	}
 
 	resize = function(){
