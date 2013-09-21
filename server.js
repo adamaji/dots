@@ -1,7 +1,9 @@
-//var host = process.env.HOST, port = 8080;
-var host = "127.0.0.1", port = 8080;
-var app = require('http').createServer()
+var host = process.env.HOST, port = process.env.PORT || 5000;
+//var host = "127.0.0.1", port = 8080;
+var app = require('http').createServer(handler)
 	, io = require('socket.io').listen(app);
+
+//var redis = require("redis").createClient(6379, "127.0.0.1");
 
 // var url = require("url").parse(process.env.OPENREDIS_URL);
 // var redis = require("redis").createClient(url.port, url.hostname);
