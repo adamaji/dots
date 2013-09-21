@@ -15,33 +15,29 @@ function Player(){
 
 	this.update = function(ctx, keys){
 		if (keys.indexOf(window.keys.LEFT_ARROW) > -1){
-			//this.moveX(-1);
 			this.xvel += -1;
 		}
 		else if (keys.indexOf(window.keys.RIGHT_ARROW) >  -1){
-			//this.moveX(1);
 			this.xvel += 1;
 		}
 		if (keys.indexOf(window.keys.UP_ARROW) > -1){
-			//this.moveY(-1);
 			this.yvel += -1;
 		}
 		else if (keys.indexOf(window.keys.DOWN_ARROW) >  -1){
-			//this.moveY(1);
 			this.yvel += 1;
 		}
 
-		if (this.xvel > 7){
-			this.xvel = 7;
+		if (this.xvel > 5){
+			this.xvel = 5;
 		}
-		else if (this.xel < -7){
-			this.xvel = -7;
+		else if (this.xel < -5){
+			this.xvel = -5;
 		}
-		if (this.yvel > 7){
-			this.yvel = 7;
+		if (this.yvel > 5){
+			this.yvel = 5;
 		}
-		else if (this.yvel < -7){
-			this.yvel = -7;
+		else if (this.yvel < -5){
+			this.yvel = -5;
 		}
 
 		this.x += this.xvel;
