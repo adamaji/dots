@@ -1,3 +1,17 @@
+function Dot(){
+	this.init = function(x, y){
+		this.x = x;
+		this.y = y;
+	}
+
+	this.update(ctx){
+		ctx.beginPath();
+		ctx.arc(this.x,this.y,5,0,2*Math.PI);
+		ctx.fill();
+		ctx.closePath();		
+	}
+}
+
 function Player(){
 	this.init = function(xpos, ypos){
 		this.x = xpos;
@@ -64,13 +78,22 @@ function Scene(){
 		canvas = document.getElementById("scene");
 		context = canvas.getContext('2d');
 
+		context.fillStyle = '#000000';
+		context.strokeStyle = '#000000';		
+
 		players = [];
+		dots = [];
 
 		resize();
 
 		var newPlayer = new Player();
 		newPlayer.init(10,10);
 		players.push(newPlayer);
+
+		for (var i=0; i<10; i++){
+			dots.push(new Dot());
+			dots[i].init(Math.random() * 100, Math.random() * 100);
+		}
 
 		document.addEventListener('keydown', function(event){
 			if (pressed.indexOf(event.keyCode) == -1){
@@ -91,11 +114,14 @@ function Scene(){
 		for (var i=0; i<players.length; i++){
 			players[i].update(context,pressed);
 		}
+		for (var i=0; i<dots.length; i++){
+			dots[i].update(context);
+		}
 	}
 
 	resize = function(){
-		canvas.width = 500;
-		canvas.height = 500;
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
 	}
 }
 
