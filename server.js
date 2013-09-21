@@ -11,6 +11,6 @@ io.configure(function () {
 
 function handler(req, res) {
 	res.writeHead(200);
-	res.end(req);
+	res.end(JSON.stringify(req));
 }
 
