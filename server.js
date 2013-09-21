@@ -1,7 +1,5 @@
-var redis = require('redis-url').connect(process.env.REDISTOGO_URL);
+var url   = require("url").parse(process.env.OPENREDIS_URL);
+var redis = require("redis").createClient(url.port, url.hostname);
 
-redis.set('foo', 'bar');
-redis.get('foo', function(err, value) {
-  console.log('foo is: ' + value);
-});
+redis.auth(url.auth.split(":")[1]);
 
