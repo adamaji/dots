@@ -1,30 +1,11 @@
-var http = require('http'),
-    fs = require('fs'),
-    // NEVER use a Sync function except at start-up!
-    index = fs.readFileSync(__dirname + '/index.html');
+var redis = require('redis');
+var url = require('url');
+var redisURL = url.parse(process.env.REDISCLOUD_URL);
+var client = redis.createClient(redisURL.port, redisURL.hostname, {no_ready_check: true});
+client.auth(redisURL.auth.split(":")[1]);
 
-// Send index.html to all requests
-var app = http.createServer(function(req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.end(index);
+client.set('foo', 'bar');
+client.get('foo', function (err, reply) {
+	console.log(reply.toString()); // Will print `bar`
 });
 
-// Socket.io server listens to our app
-var io = require('socket.io').listen(app);
-
-// Send current time to all connected clients
-function sendTime() {
-    io.sockets.emit('time', { time: new Date().toJSON() });
-}
-
-// Send current time every 10 secs
-setInterval(sendTime, 10000);
-
-// Emit welcome message on connection
-io.sockets.on('connection', function(socket) {
-    socket.emit('welcome', { message: 'Welcome!' });
-
-    socket.on('i am client', console.log);
-});
-
-app.listen(3000);
