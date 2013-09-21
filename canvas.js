@@ -1,13 +1,7 @@
+
 collide = function(obj1, obj2){
-	if ((obj1.x + obj1.radius >= obj2.x)&&(obj1.x + obj1.radius <= obj2.x + obj2.radius)){
-		if (((obj1.y + obj1.radius >= obj2.y)&&(obj1.y + obj1.radius <= obj2.y + obj2.radius))||((obj1.y - obj1.radius <= obj2.y)&&(obj1.y - obj1.radius >= obj2.y - obj2.radius))){
-			return true;
-		}
-	}
-	else if ((obj1.x - obj1.radius <= obj2.x)&&(obj1.x - obj1.radius >= obj2.x - obj2.radius)){
-		if (((obj1.y + obj1.radius >= obj2.y)&&(obj1.y + obj1.radius <= obj2.y + obj2.radius))||((obj1.y - obj1.radius <= obj2.y)&&(obj1.y - obj1.radius >= obj2.y - obj2.radius))){
-			return true;
-		}
+	if ( Math.pow(obj2.x - obj1.x, 2) + Math.pow(obj2.y-obj1.y, 2) <= Math.pow(obj1.radius + obj2.radius, 2)){
+		return true;
 	}
 	return false;
 }
@@ -41,7 +35,6 @@ function Dot(x, y){
 		ctx.fill();
 		ctx.closePath();		
 	}
-
 }
 
 function Player(){
@@ -52,6 +45,8 @@ function Player(){
 		this.yvel = 0;
 
 		this.radius = 10;
+
+		this.dots = [];
 	}
 
 	this.render = function(ctx){
@@ -75,22 +70,43 @@ function Player(){
 			this.yvel += 1;
 		}
 
-		if (this.xvel > 5){
-			this.xvel = 5;
-		}
-		else if (this.xel < -5){
-			this.xvel = -5;
-		}
-		if (this.yvel > 5){
-			this.yvel = 5;
-		}
-		else if (this.yvel < -5){
-			this.yvel = -5;
-		}
+		var tempx = this.x;
+		var tempy = this.y;
+		for(var i=0; i<this.dots.length; i++){
+			tempx2 = this.dots[i].x;
+			tempy2 = this.dots[i].y;
+			this.dots[i].x = tempx;
+			this.dots[i].y = tempy;
+			tempx = tempx2;
+			tempy = tempy2;
+ 		}
 
 		this.x += this.xvel;
 		this.y += this.yvel;
+		if (this.x < 0){
+			this.x = 0;
+			this.xvel = 0;
+		}
+		if (this.x > 1000){
+			this.x = 1000;
+			this.xvel = 0;
+		}
+		if (this.y < 0){
+			this.y = 0;
+			this.yvel = 0;
+		}
+		if (this.y > 650){
+			this.y = 650;
+			this.yvel = 0;
+		}		
 		this.render(ctx);
+		for (var i=0; i<this.dots.length; i++){
+			this.dots[i].update(ctx);
+		}
+	}
+
+	this.addDot = function(x,y){
+		this.dots.push(new Dot(x, y));
 	}
 
 }
@@ -146,6 +162,7 @@ function Scene(){
 			context.strokeStyle = '#000000';				
 			if (collide(dots[i], players[0])){
 				explosions.push(new Explosion(dots[i].x,dots[i].y));
+				players[0].addDot(dots[i].x, dots[i].y);
 				dots.splice(dots.indexOf(dots[i]),1);
 			}
 			dots[i].update(context);
