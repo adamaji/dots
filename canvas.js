@@ -34,16 +34,16 @@ function Player(){
 		if (this.xvel > 7){
 			this.xvel = 7;
 		}
-		else if (this.xel < 0){
-			this.xvel = 0;
+		else if (this.xel < -7){
+			this.xvel = -7;
 		}
 		if (this.yvel > 7){
 			this.yvel = 7;
 		}
-		else if (this.yvel < 0){
-			this.yvel = 0;
+		else if (this.yvel < -7){
+			this.yvel = -7;
 		}
-		
+
 		this.x += this.xvel;
 		this.y += this.yvel;
 		this.render(ctx);
