@@ -4,11 +4,11 @@ function Player(){
 		this.y = ypos;
 	}
 
-	this.render = function(){
-		context.beginPath();
-		context.arc(this.x,this.y,10,0,2*Math.PI);
-		context.fill();
-		context.closePath();
+	this.render = function(ctx){
+		ctx.beginPath();
+		ctx.arc(this.x,this.y,10,0,2*Math.PI);
+		ctx.fill();
+		ctx.closePath();
 	}
 
 	this.moveX = function(x){
@@ -24,7 +24,7 @@ function Player(){
 function Scene(){
 
 	var canvas, context;
-	
+
 	this.init = function(){
 		canvas = document.getElementById("scene");
 		context = canvas.getContext('2d');
@@ -59,7 +59,7 @@ function Scene(){
 	update = function(){
 		context.clearRect(0,0,500,500);
 		for (var i=0; i<players.length; i++){
-			players[i].render();
+			players[i].render(context);
 		}
 	}
 
