@@ -1,5 +1,13 @@
-var url   = require("url").parse(process.env.OPENREDIS_URL);
-var redis = require("redis").createClient(url.port, url.hostname);
-
-redis.auth(url.auth.split(":")[1]);
+var app = require('http').createServer(handler)
+  , io = require('socket.io').listen(app, {origins: '*:*'});
+ 
+var redis = require("redis");
+client = redis.createClient();
+ 
+app.listen(8080);
+ 
+function handler(req, res) {
+    res.writeHead(200);
+    res.end("Hello Socket");
+}
 
