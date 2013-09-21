@@ -55,7 +55,7 @@ function Scene(){
 		players.push(newPlayer);
 
 		document.addEventListener('keydown', function(event){
-			if (event.keyCode == window.keys.LEFT_ARROW){
+			/*if (event.keyCode == window.keys.LEFT_ARROW){
 				//newPlayer.moveX(-5);
 				pressed.push(window.keys.LEFT_ARROW);
 			}
@@ -70,10 +70,13 @@ function Scene(){
 			else if (event.keyCode == window.keys.DOWN_ARROW){
 				//newPlayer.moveY(5);
 				pressed.push(window.keys.DOWN_ARROW);
+			}*/
+			if (pressed.indexOf(even.keyCode) == -1){
+				pressed.push(event.keyCode)
 			}
 		});
 		document.addEventListener('keyup', function(event){
-			if (event.keyCode == window.keys.LEFT_ARROW){
+			/*if (event.keyCode == window.keys.LEFT_ARROW){
 				pressed.splice(pressed.indexOf(window.keys.LEFT_ARROW),1);
 			}
 			else if (event.keyCode == window.keys.RIGHT_ARROW){
@@ -84,7 +87,8 @@ function Scene(){
 			}
 			else if (event.keyCode == window.keys.DOWN_ARROW){
 				pressed.splice(pressed.indexOf(window.keys.DOWN_ARROW),1);
-			}
+			}*/
+			pressed.splice(pressed.indexOf(event.keyCode));
 		});					
 
 		setInterval(update, 30);
