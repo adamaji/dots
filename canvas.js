@@ -23,6 +23,8 @@ function Player(){
 
 function Scene(){
 
+	var canvas, context;
+	
 	this.init = function(){
 		canvas = document.getElementById("scene");
 		context = canvas.getContext('2d');
@@ -37,16 +39,16 @@ function Scene(){
 
 		document.addEventListener('keydown', function(event){
 			if (event.keyCode == window.keys.LEFT_ARROW){
-				newPlayer.moveX(-1);
+				newPlayer.moveX(-5);
 			}
 			else if (event.keyCode == window.keys.RIGHT_ARROW){
-				newPlayer.moveX(1);
+				newPlayer.moveX(5);
 			}
 			if (event.keyCode == window.keys.UP_ARROW){
-				newPlayer.moveY(-1);
+				newPlayer.moveY(-5);
 			}
 			else if (event.keyCode == window.keys.DOWN_ARROW){
-				newPlayer.moveY(1);
+				newPlayer.moveY(5);
 			}
 		});		
 
@@ -55,6 +57,7 @@ function Scene(){
 	}
 
 	update = function(){
+		context.clearRect(0,0,500,500);
 		for (var i=0; i<players.length; i++){
 			players[i].render();
 		}
