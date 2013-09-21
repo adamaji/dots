@@ -71,7 +71,7 @@ function Scene(){
 				//newPlayer.moveY(5);
 				pressed.push(window.keys.DOWN_ARROW);
 			}*/
-			if (pressed.indexOf(even.keyCode) == -1){
+			if (pressed.indexOf(event.keyCode) == -1){
 				pressed.push(event.keyCode)
 			}
 		});
