@@ -1,7 +1,7 @@
 var host = process.env.HOST, port = process.env.PORT || 8080;
 var app = require('http').createServer(handler)
-	, io = require('socket.io').listen(app);//,
-	//fs = require('fs');
+	, io = require('socket.io').listen(app),
+	fs = require('fs');
 
 app.listen(port);
 
@@ -12,15 +12,15 @@ io.configure(function () {
 
 function handler(req, res) {
 	res.writeHead(200);
-	//res.end(fs.readFileSync("index.html"));
-	res.end("hello sockets");
+	res.end(fs.readFileSync("index.html"));
+	//res.end("hello sockets");
 }
 
-socket.emit('log', {
-	data: ""
-});
+//socket.emit('log', {
+//	data: ""
+//});
 
-var setEventHandlers = function() {
+setEventHandlers = function() {
 	socket.sockets.on("connection", onSocketConnection);
 };
 
@@ -73,5 +73,5 @@ function onMovePlayer(data) {
 	this.broadcast.emit("move player", {});
 };
 
-setEventHandlers();
+//setEventHandlers();
 
