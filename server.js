@@ -1,6 +1,7 @@
 var host = process.env.HOST, port = process.env.PORT || 8080;
 var app = require('http').createServer(handler)
-	, io = require('socket.io').listen(app);
+	, io = require('socket.io').listen(app),
+	fs = require('fs');
 
 app.listen(port);
 
@@ -11,7 +12,7 @@ io.configure(function () {
 
 function handler(req, res) {
 	res.writeHead(200);
-	res.end(JSON.stringify(req));
+	res.end(fs.readFileSync("index.html"));
 }
 
 socket.emit('log', {
