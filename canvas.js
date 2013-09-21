@@ -1,15 +1,47 @@
-function Dot(){
-	this.init = function(x, y){
-		this.x = x;
-		this.y = y;
+collide = function(obj1, obj2){
+	if ((obj1.x + obj1.radius >= obj2.x)&&(obj1.x + obj1.radius <= obj2.x + obj2.radius)){
+		if (((obj1.y + obj1.radius >= obj2.y)&&(obj1.y + obj1.radius <= obj2.y + obj2.radius))||((obj1.y - obj1.radius <= obj2.y)&&(obj1.y - obj1.radius >= obj2.y - obj2.radius))){
+			return true;
+		}
 	}
+	else if ((obj1.x - obj1.radius <= obj2.x)&&(obj1.x - obj1.radius >= obj2.x - obj2.radius)){
+		if (((obj1.y + obj1.radius >= obj2.y)&&(obj1.y + obj1.radius <= obj2.y + obj2.radius))||((obj1.y - obj1.radius <= obj2.y)&&(obj1.y - obj1.radius >= obj2.y - obj2.radius))){
+			return true;
+		}
+	}
+	return false;
+}
+
+function Explosion(x, y){
+	this.x = x;
+	this.y = y;
+	this.radius = 0;
+	
+	this.update = function(ctx){
+		if (this.radius < 100){
+			for (var i=0; i<8; i++){
+				ctx.beginPath();
+				ctx.arc(this.x+Math.cos(i * (Math.PI / 4))*this.radius,this.y+Math.sin(i * (Math.PI / 4))*this.radius,3,0,2*Math.PI);
+				ctx.fill();
+				ctx.closePath();			
+			}
+			this.radius += 5;
+		}
+	}
+}
+
+function Dot(x, y){
+	this.x = x;
+	this.y = y;
+	this.radius = 5;
 
 	this.update = function(ctx){
 		ctx.beginPath();
-		ctx.arc(this.x,this.y,5,0,2*Math.PI);
+		ctx.arc(this.x,this.y,this.radius,0,2*Math.PI);
 		ctx.fill();
 		ctx.closePath();		
 	}
+
 }
 
 function Player(){
@@ -18,11 +50,13 @@ function Player(){
 		this.y = ypos;
 		this.xvel = 0;
 		this.yvel = 0;
+
+		this.radius = 10;
 	}
 
 	this.render = function(ctx){
 		ctx.beginPath();
-		ctx.arc(this.x,this.y,10,0,2*Math.PI);
+		ctx.arc(this.x,this.y,this.radius,0,2*Math.PI);
 		ctx.fill();
 		ctx.closePath();
 	}
@@ -59,32 +93,22 @@ function Player(){
 		this.render(ctx);
 	}
 
-	this.moveX = function(x){
-		this.x += x;
-	}
-
-	this.moveY = function(y){
-		this.y += y;
-	}
-
 }
 
 function Scene(){
 
 	var canvas, context;
 	var pressed = [];
-	var width = window.innerWidth;
-	var height = window.innerHeight;
+	var width = 1000;
+	var height = 650;
 
 	this.init = function(){
 		canvas = document.getElementById("scene");
-		context = canvas.getContext('2d');
-
-		context.fillStyle = '#000000';
-		context.strokeStyle = '#000000';		
+		context = canvas.getContext('2d');	
 
 		players = [];
 		dots = [];
+		explosions = [];
 
 		resize();
 
@@ -93,8 +117,7 @@ function Scene(){
 		players.push(newPlayer);
 
 		for (var i=0; i<10; i++){
-			dots.push(new Dot());
-			dots[i].init(Math.random() * width, Math.random() * height);
+			dots.push(new Dot(Math.random() * width, Math.random() * height));
 		}
 
 		document.addEventListener('keydown', function(event){
@@ -111,22 +134,37 @@ function Scene(){
 	}
 
 	update = function(){
-		context.clearRect(0,0,500,500);
+		context.clearRect(0,0,width,height);
 		console.log(pressed);
 		for (var i=0; i<players.length; i++){
+			context.fillStyle = '#000000';
+			context.strokeStyle = '#000000';				
 			players[i].update(context,pressed);
 		}
 		for (var i=0; i<dots.length; i++){
+			context.fillStyle = '#33AAFF';
+			context.strokeStyle = '#000000';				
+			if (collide(dots[i], players[0])){
+				explosions.push(new Explosion(dots[i].x,dots[i].y));
+				dots.splice(dots.indexOf(dots[i]),1);
+			}
 			dots[i].update(context);
+		}
+		for (var i=0; i<explosions.length; i++){
+			explosions[i].update(context);
+		}
+
+		if (dots.length < 10){
+			dots.push(new Dot(Math.random() * width, Math.random() * height));
 		}
 	}
 
 	resize = function(){
-		width = window.innerWidth;
-		height = window.innerHeight;
+		width = 1000;//window.innerWidth;
+		height = 650;//window.innerHeight;
 
-		canvas.width = window.innerWidth;
-		canvas.height = window.innerHeight;
+		canvas.width = width;
+		canvas.height = height;
 	}
 }
 
