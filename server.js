@@ -1,10 +1,11 @@
-var app = require('http').createServer(handler)
-  , io = require('socket.io').listen(app, {origins: '*:*'});
+var host = process.env.HOST, port = 8080;
+var app = require('http').createServer()
+  , io = require('socket.io').listen(app);
  
 var redis = require("redis");
 client = redis.createClient();
  
-app.listen(8080);
+app.listen(port, host);
 
 io.configure(function () { 
   io.set("transports", ["xhr-polling"]); 
