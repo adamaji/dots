@@ -13,8 +13,8 @@ var app = require('http').createServer()
 
 // Redis To Go
 // process.env.REDISTOGO_URL=redis://redistogo:8dc1ca1ae85ad5a2b8e17c942455b544@dory.redistogo.com:11101/
-var redis = require("redis").createClient(11101, "dory.redistogo.com");
-redis.auth("8dc1ca1ae85ad5a2b8e17c942455b544");
+//var redis = require("redis").createClient(11101, "dory.redistogo.com");
+//redis.auth("8dc1ca1ae85ad5a2b8e17c942455b544");
 
 // Openredis
 // redis-cli -h proxy3.openredis.com  -p 13178 -a e9edeab20a11f5f693df70fdeae62647909314499e85d7b0a12a671a9048302d
