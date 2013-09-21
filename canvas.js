@@ -1,4 +1,3 @@
-
 collide = function(obj1, obj2){
 	if ( Math.pow(obj2.x - obj1.x, 2) + Math.pow(obj2.y-obj1.y, 2) <= Math.pow(obj1.radius + obj2.radius, 2)){
 		return true;
@@ -34,6 +33,19 @@ function Dot(x, y){
 		ctx.arc(this.x,this.y,this.radius,0,2*Math.PI);
 		ctx.fill();
 		ctx.closePath();		
+	}
+}
+
+function Spike(x, y){
+	this.x = x;
+	this.y = y;
+	this.radius = 5;
+
+	this.update = function(ctx){
+		ctx.beginPath();
+		ctx.arc(this.x,this.y,this.radius,0,2*Math.PI);
+		ctx.fill();
+		ctx.closePath();	
 	}
 }
 
@@ -124,6 +136,7 @@ function Scene(){
 
 		players = [];
 		dots = [];
+		spikes = [];
 		explosions = [];
 
 		resize();
@@ -135,6 +148,9 @@ function Scene(){
 		for (var i=0; i<10; i++){
 			dots.push(new Dot(Math.random() * width, Math.random() * height));
 		}
+		for (var i=0; i<5; i++){
+			spikes.push(new Spike(Math.random() * width, Math.random() * height));
+		}		
 
 		document.addEventListener('keydown', function(event){
 			if (pressed.indexOf(event.keyCode) == -1){
@@ -157,6 +173,15 @@ function Scene(){
 			context.strokeStyle = '#000000';				
 			players[i].update(context,pressed);
 		}
+		for (var i=0; i<spikes.length; i++){
+			context.fillStyle = '#FF1177';
+			context.strokeStyle = '#000000';
+			if (collide(spikes[i], players[0])){
+				spikes.splice(spikes.indexOf(spikes[i]),1);
+				players[0].dots.pop();
+			}	
+			spikes[i].update(context);
+		}		
 		for (var i=0; i<dots.length; i++){
 			context.fillStyle = '#33AAFF';
 			context.strokeStyle = '#000000';				
@@ -173,6 +198,9 @@ function Scene(){
 
 		if (dots.length < 10){
 			dots.push(new Dot(Math.random() * width, Math.random() * height));
+		}
+		if (spikes.length < 5){
+			spikes.push(new Spike(Math.random() * width, Math.random() * height));
 		}
 	}
 
