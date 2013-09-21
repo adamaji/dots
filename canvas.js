@@ -4,7 +4,7 @@ function Dot(){
 		this.y = y;
 	}
 
-	this.update(ctx) = function(){
+	this.update = function(ctx){
 		ctx.beginPath();
 		ctx.arc(this.x,this.y,5,0,2*Math.PI);
 		ctx.fill();
