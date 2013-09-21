@@ -73,6 +73,8 @@ function Scene(){
 
 	var canvas, context;
 	var pressed = [];
+	var width = window.innerWidth;
+	var height = window.innerHeight;
 
 	this.init = function(){
 		canvas = document.getElementById("scene");
@@ -92,7 +94,7 @@ function Scene(){
 
 		for (var i=0; i<10; i++){
 			dots.push(new Dot());
-			dots[i].init(Math.random() * 100, Math.random() * 100);
+			dots[i].init(Math.random() * width, Math.random() * height);
 		}
 
 		document.addEventListener('keydown', function(event){
@@ -120,6 +122,9 @@ function Scene(){
 	}
 
 	resize = function(){
+		width = window.innerWidth;
+		height = window.innerHeight;
+
 		canvas.width = window.innerWidth;
 		canvas.height = window.innerHeight;
 	}
