@@ -11,6 +11,7 @@ io.configure(function () {
 });
 
 function handler(req, res) {
+	res.setHeader("Content-Type", "text/html");
 	res.writeHead(200);
 	res.end(fs.readFileSync("index.html"));
 	//res.end("hello sockets");
