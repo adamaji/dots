@@ -8,6 +8,7 @@ function Scene(){
 
 		context.beginPath();
 		context.arc(10,10,10,0,2*Math.PI);
+		context.fill();
 		context.closePath();
 	}
 
