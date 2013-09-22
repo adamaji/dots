@@ -11,6 +11,7 @@ io.configure(function () {
 	io.set("transports", ["xhr-polling"]); 
 	io.set("polling duration", 10); 
 });
+setEventHandlers();
 
 function handler(req, res) {
 	
@@ -26,7 +27,7 @@ function handler(req, res) {
 
 var setEventHandlers = function() {
 	console.log("in event hand");
-	io.sockets.on("connection", onSocketConnection);
+	app.sockets.on("connection", onSocketConnection);
 };
 
 function onSocketConnection(client) {
