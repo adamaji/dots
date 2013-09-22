@@ -180,6 +180,7 @@ function Scene(){
 		});					
 
 		setInterval(update, 30);
+		$.publish('canvas/loaded');
 	}
 
 	update = function(){
