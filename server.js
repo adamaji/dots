@@ -13,7 +13,8 @@ io.configure(function () {
 function handler(req, res) {
 	var url = require('url').parse(req.url, true);
 	var target = (url.pathname == "/") ? "index.html" : url.pathname;
-	res.writeHead(200, {'Content-Type': 'text/html'});
+	//res.writeHead(200, {'Content-Type': 'text/html'});
+	res.writeHead(200);
 	res.end(fs.readFileSync(target));
 }
 
