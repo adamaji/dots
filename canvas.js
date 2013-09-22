@@ -159,6 +159,7 @@ function Scene(){
 	var height = 650;
 
 	this.init = function(){
+		console.log("canvas init");
 		canvas = document.getElementById("scene");
 		context = canvas.getContext('2d');	
 
