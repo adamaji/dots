@@ -1,7 +1,7 @@
 function init() {
 	// 43306
 	console.log("client init");
-	socket = io.connect("http://multipacman.herokuapp.com");
+	var socket = io.connect("http://multipacman.herokuapp.com");
 	setEventHandlers();
 };
 
@@ -15,7 +15,8 @@ var setEventHandlers = function() {
 
 function onSocketConnected() {
 	console.log("Connected to socket server");
-	socket.emit("new player", {x: 10, y: 10});
+	console.log(localPlayer.x);
+	socket.emit("new player", {x: localPlayer.x, y: localPlayer.y});
 };
 
 function onSocketDisconnect() {
