@@ -5,6 +5,8 @@ var app = require('http').createServer(handler),
 
 var players = [];
 
+var socket = io.listen(port);
+
 app.listen(port);
 
 io.configure(function () { 
@@ -27,7 +29,7 @@ function handler(req, res) {
 
 var setEventHandlers = function() {
 	console.log("in event hand");
-	app.sockets.on("connection", onSocketConnection);
+	socket.sockets.on("connection", onSocketConnection);
 };
 
 function onSocketConnection(client) {
