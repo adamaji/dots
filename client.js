@@ -3,7 +3,7 @@ var socket;
 function init() {
 	// 43306
 	console.log("client init");
-	socket = rocket.connect("http://multipacman.herokuapp.com");
+	socket = io.connect("http://multipacman.herokuapp.com");
 	setEventHandlers();
 };
 
