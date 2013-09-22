@@ -1,5 +1,6 @@
 function init() {
 	// 43306
+	alert("init");
 	socket = io.connect("http://multipacman.herokuapp.com");
 	setEventHandlers();
 };

@@ -3,6 +3,8 @@ var app = require('http').createServer(handler)
 	, io = require('socket.io').listen(app),
 	fs = require('fs');
 
+var players = [];
+
 app.listen(port);
 
 io.configure(function () { 
@@ -42,6 +44,7 @@ function onClientDisconnect() {
 };
 
 function onNewPlayer(data) {
+	alert("newp serv");
 	var newPlayer = new Player(data.x, data.y);
 	newPlayer.setID(this.id);
 	this.broadcast.emit("new player", {id: newPlayer.id, x: newPlayer.x, y: newPlayer.y});
