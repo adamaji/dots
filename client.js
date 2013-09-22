@@ -34,7 +34,8 @@ function onSocketDisconnect() {
 
 function onNewPlayer(data) {
 	console.log("new player in client");
-	var newPlayer = new Player(data.x, data.y);
+	var newPlayer = new Player();
+	newPlayer.init(data.x, data.y);
 	newPlayer.id = data.id;
 	remotePlayers.push(newPlayer);
 };

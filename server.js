@@ -47,7 +47,8 @@ function onClientDisconnect() {
 
 function onNewPlayer(data) {
 	console.log("new p serv");
-	var newPlayer = new Player(data.x, data.y);
+	var newPlayer = new Player();
+	newPlayer.init(data.x, data.y);
 	//newPlayer.setID(this.id);
 	newPlayer.id = this.id;
 	this.broadcast.emit("new player", {id: newPlayer.id, x: newPlayer.x, y: newPlayer.y});
