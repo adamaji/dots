@@ -1,5 +1,5 @@
 var host = process.env.HOST, port = process.env.PORT || 8080;
-var io = require('socket.io'),
+var io = require('socket.io').listen(app),
 	fs = require('fs');
 
 var players = [];
