@@ -253,6 +253,7 @@ function Scene(){
 		context.fillStyle = '#000000';
 		context.strokeStyle = '#000000';		
 		localPlayer.update(context,pressed);
+		socket.emit("move player", {id:localPlayer.id, x: localPlayer.x, y:localPlayer.y});
 		for (var i=0; i<remotePlayers.length; i++){				
 			remotePlayers[i].update2(context);
 		}

@@ -61,7 +61,7 @@ function onNewPlayer(data) {
 };
 
 function onMovePlayer(data) {
-	var movePlayer = playerById(this.id);
+	var movePlayer = playerById(data.id);
 	if (!movePlayer) {
 		return;
 	};
