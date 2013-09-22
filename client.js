@@ -14,7 +14,7 @@ function init() {
 var setEventHandlers = function() {
 	socket.on("connect", onSocketConnected);
 	socket.on("disconnect", onSocketDisconnect);
-	//socket.on("new player", onNewPlayer);
+	socket.on("new player", onNewPlayer);
 	//socket.on("move player", onMovePlayer);
 	//socket.on("remove player", onRemovePlayer);
 };
