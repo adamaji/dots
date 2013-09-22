@@ -6,7 +6,7 @@ var app = require('http').createServer(handler),
 var players = [];
 
 //var socket = io.listen(port);
-
+console.log("PLEASE BE HERE");
 app.listen(port);
 console.log("now we're here");
 io.configure(function () { 
