@@ -13,11 +13,11 @@ io.configure(function () {
 });
 
 function handler(req, res) {
+	setEventHandlers();
 	var url = require('url').parse(req.url, true);
 	var target = (url.pathname == "/") ? "index.html" : url.pathname.slice(1);
 	res.writeHead(200);
 	res.end(fs.readFileSync(target));
-	setEventHandlers();
 }
 
 //socket.emit('log', {
