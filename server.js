@@ -12,9 +12,9 @@ io.configure(function () {
 
 function handler(req, res) {
 	var url = require('url').parse(req.url, true);
+	var target = (url.pathname == "/") ? "index.html" : url.pathname;
 	res.writeHead(200, {'Content-Type': 'text/html'});
-	//res.end(fs.readFileSync(url.path));
-	res.end(url.pathname);
+	res.end(fs.readFileSync(target));
 }
 
 //socket.emit('log', {
