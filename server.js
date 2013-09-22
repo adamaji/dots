@@ -32,7 +32,7 @@ var setEventHandlers = function() {
 function onSocketConnection(client) {
 	console.log(client.id);
 	client.on("disconnect", onClientDisconnect);
-	client.on("new player", onNewPlayer);
+	client.on("newplayer", onNewPlayer);
 	client.on("move player", onMovePlayer);
 };
 

@@ -18,7 +18,7 @@ var setEventHandlers = function() {
 function onSocketConnected() {
 	console.log("Connected to socket server");
 	console.log(localPlayer.x);
-	socket.emit("new player", {x: localPlayer.x, y: localPlayer.y});
+	socket.emit("newplayer", {x: localPlayer.x, y: localPlayer.y});
 };
 
 function onSocketDisconnect() {
