@@ -16,7 +16,7 @@ io.configure(function () {
 
 
 function handler(req, res) {
-	//setEventHandlers();
+	setEventHandlers();
 	console.log("now we're there");
 	var url = require('url').parse(req.url, true);
 	var target = (url.pathname == "/") ? "index.html" : url.pathname.slice(1);
