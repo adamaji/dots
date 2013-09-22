@@ -22,18 +22,21 @@ function onSocketDisconnect() {
 };
 
 function onNewPlayer(data) {
-	//var newPlayer = new Player(data.x, data.y);
-	//newPlayer.id = data.id;
-	//remotePlayers.push(newPlayer);
+	var newPlayer = new Player(data.x, data.y);
+	newPlayer.id = data.id;
+	players.push(newPlayer);
 };
 
 function onMovePlayer(data) {
-	//movePlayer.setX(data.x);
-	//movePlayer.setY(data.y);
+	var movePlayer = playerById(data.id);
+	movePlayer.setX(data.x);
+	movePlayer.setY(data.y);
+	movePlayer.setXVel(data.xvel);
+	movePlayer.setYVel(data.yvel);
 };
 
 function onRemovePlayer(data) {
-	//players.splice(players.indexOf(removePlayer), 1);
+	players.splice(players.indexOf(removePlayer), 1);
 };
 
 init();

@@ -51,13 +51,12 @@ function Spike(x, y){
 
 function Player(){
 	this.init = function(xpos, ypos){
+		this.id = "";
 		this.x = xpos;
 		this.y = ypos;
 		this.xvel = 0;
 		this.yvel = 0;
-
 		this.radius = 10;
-
 		this.dots = [];
 	}
 
@@ -120,8 +119,27 @@ function Player(){
 	this.addDot = function(x,y){
 		this.dots.push(new Dot(x, y));
 	}
-
 }
+
+Player.prototype.setX = function(a){
+	this.x = a;
+};
+
+Player.prototype.setY = function(a){
+	this.y = a;
+};
+
+Player.prototype.setXVel = function(a){
+	this.xvel = a;
+};
+
+Player.prototype.setYVel = function(a){
+	this.yvel = a;
+};
+
+Player.prototype.setID = function(a){
+	this.id = a;
+};
 
 function Scene(){
 
