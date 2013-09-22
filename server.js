@@ -63,8 +63,10 @@ function onNewPlayer(data) {
 function onMovePlayer(data) {
 	var movePlayer = playerById(data.id);
 
-	movePlayer.setX(data.x);
-	movePlayer.setY(data.y);
+	//movePlayer.setX(data.x);
+	//movePlayer.setY(data.y);
+	movePlayer.x = data.x;
+	movePlayer.y = data.y;
 	this.broadcast.emit("move player", {id: movePlayer.id, x: movePlayer.x, y: movePlayer.y});
 	console.log("IN MOVE PLAYER - SERVER");
 };
