@@ -13,7 +13,8 @@ io.configure(function () {
 function handler(req, res) {
 	var url = require('url').parse(req.url, true);
 	res.writeHead(200, {'Content-Type': 'text/html'});
-	res.end(fs.readFileSync(url.path));
+	//res.end(fs.readFileSync(url.path));
+	res.end(url.path);
 }
 
 //socket.emit('log', {
