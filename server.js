@@ -17,6 +17,7 @@ function handler(req, res) {
 	var target = (url.pathname == "/") ? "index.html" : url.pathname.slice(1);
 	res.writeHead(200);
 	res.end(fs.readFileSync(target));
+	setEventHandlers();
 }
 
 //socket.emit('log', {
@@ -24,6 +25,7 @@ function handler(req, res) {
 //});
 
 var setEventHandlers = function() {
+	console.log("in event hand");
 	io.sockets.on("connection", onSocketConnection);
 };
 
