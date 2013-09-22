@@ -43,10 +43,13 @@ function onNewPlayer(data) {
 function onMovePlayer(data) {
 	var movePlayer = playerById(data.id);
 	console.log("IN MOVE PLAYER - CLIENT");
-	movePlayer.setX(data.x);
+	movePlayer.x = data.x;
+	movePlayer.y = data.y;
+	
+	/*movePlayer.setX(data.x);
 	movePlayer.setY(data.y);
 	movePlayer.setXVel(data.xvel);
-	movePlayer.setYVel(data.yvel);
+	movePlayer.setYVel(data.yvel);*/
 };
 
 function onRemovePlayer(data) {
