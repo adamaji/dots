@@ -62,6 +62,16 @@ collide = function(obj1, obj2){
 	return false;
 }
 
+function playerById(id) {
+	var i;
+	for (i = 0; i < remotePlayers.length; i++) {
+		if (remotePlayers[i].id == id)
+			return remotePlayers[i];
+	};
+	
+	return false;
+};
+
 function Explosion(x, y){
 	this.x = x;
 	this.y = y;
