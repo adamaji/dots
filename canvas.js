@@ -1,3 +1,6 @@
+var localPlayer;
+var remotePlayers = [];
+
 collide = function(obj1, obj2){
 	if ( Math.pow(obj2.x - obj1.x, 2) + Math.pow(obj2.y-obj1.y, 2) <= Math.pow(obj1.radius + obj2.radius, 2)){
 		return true;
@@ -65,6 +68,13 @@ function Player(){
 		ctx.arc(this.x,this.y,this.radius,0,2*Math.PI);
 		ctx.fill();
 		ctx.closePath();
+	}
+
+	this.update = function(ctx){
+		this.render(ctx);
+		for (var i=0; i<this.dots.length; i++){
+			this.dots[i].update(ctx);
+		}		
 	}
 
 	this.update = function(ctx, keys){
@@ -152,16 +162,17 @@ function Scene(){
 		canvas = document.getElementById("scene");
 		context = canvas.getContext('2d');	
 
-		players = [];
+		remotePlayers = [];
 		dots = [];
 		spikes = [];
 		explosions = [];
 
 		resize();
 
-		var newPlayer = new Player();
-		newPlayer.init(10,10);
-		players.push(newPlayer);
+		localPlayer = new Player();
+		localPlayer.init(10,10);
+		//newPlayer.init(10,10);
+		//players.push(newPlayer);
 
 		for (var i=0; i<10; i++){
 			dots.push(new Dot(Math.random() * width, Math.random() * height));
@@ -185,26 +196,27 @@ function Scene(){
 
 	update = function(){
 		context.clearRect(0,0,width,height);
-		for (var i=0; i<players.length; i++){
-			context.fillStyle = '#000000';
-			context.strokeStyle = '#000000';				
-			players[i].update(context,pressed);
+		context.fillStyle = '#000000';
+		context.strokeStyle = '#000000';		
+		localPlayer.update(context,pressed);
+		for (var i=0; i<remotePlayers.length; i++){				
+			remotePlayers[i].update(context);
 		}
 		for (var i=0; i<spikes.length; i++){
 			context.fillStyle = '#FF1177';
 			context.strokeStyle = '#000000';
-			if (collide(spikes[i], players[0])){
+			if (collide(spikes[i], localPlayer)){
 				spikes.splice(spikes.indexOf(spikes[i]),1);
-				players[0].dots.pop();
+				localPlayer.dots.pop();
 			}	
 			spikes[i].update(context);
 		}		
 		for (var i=0; i<dots.length; i++){
 			context.fillStyle = '#33AAFF';
 			context.strokeStyle = '#000000';				
-			if (collide(dots[i], players[0])){
+			if (collide(dots[i], localPlayer)){
 				explosions.push(new Explosion(dots[i].x,dots[i].y));
-				players[0].addDot(dots[i].x, dots[i].y);
+				localPlayer.addDot(dots[i].x, dots[i].y);
 				dots.splice(dots.indexOf(dots[i]),1);
 			}
 			dots[i].update(context);
