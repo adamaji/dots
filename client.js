@@ -12,6 +12,7 @@ function init() {
 };
 
 var setEventHandlers = function() {
+	console.log("client handler");
 	socket.on("connect", onSocketConnected);
 	socket.on("disconnect", onSocketDisconnect);
 	socket.on("new player", onNewPlayer);
