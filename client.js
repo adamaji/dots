@@ -17,8 +17,8 @@ var setEventHandlers = function() {
 	socket.on("connect", onSocketConnected);
 	socket.on("disconnect", onSocketDisconnect);
 	socket.on("new player", onNewPlayer);
-	console.log("finish client handler");
 	socket.on("move player", onMovePlayer);
+	console.log("finish client handler");
 	//socket.on("remove player", onRemovePlayer);
 };
 
