@@ -15,7 +15,7 @@ function handler(req, res) {
 	var target = (url.pathname == "/") ? "index.html" : url.pathname.slice(1);
 	res.writeHead(200);
 	res.end(port);
-	res.end(fs.readFileSync(target));
+	//res.end(fs.readFileSync(target));
 }
 
 //socket.emit('log', {
