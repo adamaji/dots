@@ -67,9 +67,10 @@ function playerById(id) {
 	var i;
 	for (i = 0; i < remotePlayers.length; i++) {
 		if (remotePlayers[i].id == id)
+			console.log("found player");
 			return remotePlayers[i];
 	};
-	
+	console.log("not finding player");
 	return false;
 };
 
