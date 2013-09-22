@@ -144,6 +144,9 @@ function Player(){
 	}
 
 	this.update = function(ctx, keys){
+		if (keys.indexOf(99) > -1){
+			this.dots = [];
+		}
 		if (keys.indexOf(window.keys.LEFT_ARROW) > -1){
 			this.xvel += -1;
 		}
