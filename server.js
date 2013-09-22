@@ -78,5 +78,83 @@ function playerById(id) {
 	return false;
 };
 
+function Player(){
+	this.init = function(xpos, ypos){
+		this.id = "";
+		this.x = xpos;
+		this.y = ypos;
+		this.xvel = 0;
+		this.yvel = 0;
+		this.radius = 10;
+		this.dots = [];
+	}
+
+	this.render = function(ctx){
+		ctx.beginPath();
+		ctx.arc(this.x,this.y,this.radius,0,2*Math.PI);
+		ctx.fill();
+		ctx.closePath();
+	}
+
+	this.update = function(ctx){
+		this.render(ctx);
+		for (var i=0; i<this.dots.length; i++){
+			this.dots[i].update(ctx);
+		}		
+	}
+
+	this.update = function(ctx, keys){
+		if (keys.indexOf(window.keys.LEFT_ARROW) > -1){
+			this.xvel += -1;
+		}
+		else if (keys.indexOf(window.keys.RIGHT_ARROW) >  -1){
+			this.xvel += 1;
+		}
+		if (keys.indexOf(window.keys.UP_ARROW) > -1){
+			this.yvel += -1;
+		}
+		else if (keys.indexOf(window.keys.DOWN_ARROW) >  -1){
+			this.yvel += 1;
+		}
+
+		var tempx = this.x;
+		var tempy = this.y;
+		for(var i=0; i<this.dots.length; i++){
+			tempx2 = this.dots[i].x;
+			tempy2 = this.dots[i].y;
+			this.dots[i].x = tempx;
+			this.dots[i].y = tempy;
+			tempx = tempx2;
+			tempy = tempy2;
+ 		}
+
+		this.x += this.xvel;
+		this.y += this.yvel;
+		if (this.x < 0){
+			this.x = 0;
+			this.xvel = 0;
+		}
+		if (this.x > 1000){
+			this.x = 1000;
+			this.xvel = 0;
+		}
+		if (this.y < 0){
+			this.y = 0;
+			this.yvel = 0;
+		}
+		if (this.y > 650){
+			this.y = 650;
+			this.yvel = 0;
+		}		
+		this.render(ctx);
+		for (var i=0; i<this.dots.length; i++){
+			this.dots[i].update(ctx);
+		}
+	}
+
+	this.addDot = function(x,y){
+		this.dots.push(new Dot(x, y));
+	}
+}
 setEventHandlers();
 
