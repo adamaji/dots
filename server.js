@@ -6,10 +6,10 @@ var players = [];
 
 
 
-io.configure(function () { 
+//io.configure(function () { 
 	io.set("transports", ["xhr-polling"]); 
 	io.set("polling duration", 10); 
-});
+//});
 
 app = require('http').createServer(handler);
 console.log("PLEASE BE HERE");
