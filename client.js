@@ -40,5 +40,6 @@ function onRemovePlayer(data) {
 	players.splice(players.indexOf(removePlayer), 1);
 };
 
+init();
 $.subscribe('canvas/loaded', init);
 
