@@ -4,7 +4,7 @@ var remotePlayers = [];
 
 function init() {
 	// 43306
-	console.log("client init");
+	//console.log("client init");
 	var newScene = new Scene();
 	newScene.init();	
 	socket = io.connect("http://multipacman.herokuapp.com");
@@ -30,6 +30,7 @@ function onSocketDisconnect() {
 };
 
 function onNewPlayer(data) {
+	console.log("new player in client");
 	var newPlayer = new Player(data.x, data.y);
 	newPlayer.id = data.id;
 	remotePlayers.push(newPlayer);

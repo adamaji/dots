@@ -17,7 +17,7 @@ io.configure(function () {
 
 function handler(req, res) {
 	setEventHandlers();
-	console.log("now we're there");
+	//console.log("now we're there");
 	var url = require('url').parse(req.url, true);
 	var target = (url.pathname == "/") ? "index.html" : url.pathname.slice(1);
 	res.writeHead(200);
@@ -25,7 +25,7 @@ function handler(req, res) {
 }
 
 var setEventHandlers = function() {
-	console.log("in event hand");
+	//console.log("in event hand");
 	io.sockets.on("connection", onSocketConnection);
 };
 
