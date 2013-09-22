@@ -2,15 +2,15 @@ function init() {
 	// 43306
 	console.log("client init");
 	socket = io.connect("http://multipacman.herokuapp.com");
-	//setEventHandlers();
+	setEventHandlers();
 };
 
 var setEventHandlers = function() {
 	socket.on("connect", onSocketConnected);
 	socket.on("disconnect", onSocketDisconnect);
-	socket.on("new player", onNewPlayer);
-	socket.on("move player", onMovePlayer);
-	socket.on("remove player", onRemovePlayer);
+	//socket.on("new player", onNewPlayer);
+	//socket.on("move player", onMovePlayer);
+	//socket.on("remove player", onRemovePlayer);
 };
 
 function onSocketConnected() {
