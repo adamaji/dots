@@ -22,7 +22,7 @@ function handler(req, res) {
 //});
 
 var setEventHandlers = function() {
-	socket.sockets.on("connection", onSocketConnection);
+	io.sockets.on("connection", onSocketConnection);
 };
 
 function onSocketConnection(client) {
