@@ -26,7 +26,7 @@ function handler(req, res) {
 
 var setEventHandlers = function() {
 	console.log("in event hand");
-	socket.sockets.on("connection", onSocketConnection);
+	io.sockets.on("connection", onSocketConnection);
 };
 
 function onSocketConnection(client) {
