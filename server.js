@@ -48,7 +48,7 @@ function onNewPlayer(data) {
 	var i, existingPlayer;
 	for (i = 0; i < players.length; i++) {
 		existingPlayer = players[i];
-		this.emit("new player", {id: existingPlayer.id, x: existingPlayer.x, y: existingPlayer.y)});
+		this.emit("new player", {id: existingPlayer.id, x: existingPlayer.x, y: existingPlayer.y});
 	};
 	players.push(newPlayer);
 };
