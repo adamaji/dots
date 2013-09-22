@@ -180,12 +180,10 @@ function Scene(){
 		});					
 
 		setInterval(update, 30);
-
 	}
 
 	update = function(){
 		context.clearRect(0,0,width,height);
-		console.log(pressed);
 		for (var i=0; i<players.length; i++){
 			context.fillStyle = '#000000';
 			context.strokeStyle = '#000000';				
@@ -225,7 +223,6 @@ function Scene(){
 	resize = function(){
 		width = 1000;//window.innerWidth;
 		height = 650;//window.innerHeight;
-
 		canvas.width = width;
 		canvas.height = height;
 	}
@@ -233,3 +230,4 @@ function Scene(){
 
 var newScene = new Scene();
 newScene.init();
+
