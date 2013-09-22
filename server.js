@@ -97,7 +97,7 @@ function Player(){
 		ctx.closePath();
 	}
 
-	this.update = function(ctx){
+	this.update2 = function(ctx){
 		this.render(ctx);
 		for (var i=0; i<this.dots.length; i++){
 			this.dots[i].update(ctx);

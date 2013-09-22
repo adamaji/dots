@@ -122,7 +122,7 @@ function Player(){
 		ctx.closePath();
 	}
 
-	this.update = function(ctx){
+	this.update2 = function(ctx){
 		this.render(ctx);
 		for (var i=0; i<this.dots.length; i++){
 			this.dots[i].update(ctx);
@@ -253,7 +253,7 @@ function Scene(){
 		context.strokeStyle = '#000000';		
 		localPlayer.update(context,pressed);
 		for (var i=0; i<remotePlayers.length; i++){				
-			remotePlayers[i].update(context);
+			remotePlayers[i].update2(context);
 		}
 		for (var i=0; i<spikes.length; i++){
 			context.fillStyle = '#FF1177';
