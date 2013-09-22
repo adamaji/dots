@@ -1,19 +1,22 @@
 var host = process.env.HOST, port = process.env.PORT || 8080;
-var app = require('http').createServer(handler),
-    io = require('socket.io'),
+var io = require('socket.io'),
 	fs = require('fs');
 
 var players = [];
 
-var rocket = io.listen(app);
-console.log("PLEASE BE HERE");
-app.listen(port);
-console.log("now we're here");
+
+
 io.configure(function () { 
 	io.set("transports", ["xhr-polling"]); 
 	io.set("polling duration", 10); 
 });
 
+app = require('http').createServer(handler);
+console.log("PLEASE BE HERE");
+app.listen(port);
+console.log("now we're here");
+
+var rocket = io.listen(app);
 
 function handler(req, res) {
 	//setEventHandlers();
