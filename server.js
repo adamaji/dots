@@ -73,5 +73,5 @@ function playerById(id) {
 	return false;
 };
 
-$.subscribe('canvas/loaded', setEventHandlers);
+setEventHandlers();
 
