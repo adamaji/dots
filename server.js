@@ -1,11 +1,11 @@
 var host = process.env.HOST, port = process.env.PORT || 8080;
 var app = require('http').createServer(handler),
-    io = require('socket.io').listen(app),
+    io = require('socket.io'),
 	fs = require('fs');
 
 var players = [];
 
-//var socket = io.listen(port);
+var socket = io.listen(app);
 console.log("PLEASE BE HERE");
 app.listen(port);
 console.log("now we're here");
