@@ -5,10 +5,11 @@ var remotePlayers = [];
 function init() {
 	// 43306
 	//console.log("client init");
-	var newScene = new Scene();
-	newScene.init();	
+	
 	socket = io.connect("http://multipacman.herokuapp.com");
 	setEventHandlers();
+	var newScene = new Scene();
+	newScene.init();	
 };
 
 var setEventHandlers = function() {
