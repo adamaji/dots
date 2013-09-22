@@ -13,10 +13,10 @@ io.configure(function () {
 	io.set("transports", ["xhr-polling"]); 
 	io.set("polling duration", 10); 
 });
-setEventHandlers();
+
 
 function handler(req, res) {
-	
+	setEventHandlers();
 	var url = require('url').parse(req.url, true);
 	var target = (url.pathname == "/") ? "index.html" : url.pathname.slice(1);
 	res.writeHead(200);
