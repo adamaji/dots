@@ -8,7 +8,7 @@ var players = [];
 var socket = io.listen(port);
 
 app.listen(port);
-
+console.log("now we're here");
 io.configure(function () { 
 	io.set("transports", ["xhr-polling"]); 
 	io.set("polling duration", 10); 
@@ -16,16 +16,13 @@ io.configure(function () {
 
 
 function handler(req, res) {
-	setEventHandlers();
+	//setEventHandlers();
+	console.log("now we're there");
 	var url = require('url').parse(req.url, true);
 	var target = (url.pathname == "/") ? "index.html" : url.pathname.slice(1);
 	res.writeHead(200);
 	res.end(fs.readFileSync(target));
 }
-
-//socket.emit('log', {
-//	data: ""
-//});
 
 var setEventHandlers = function() {
 	console.log("in event hand");
