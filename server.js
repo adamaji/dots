@@ -52,11 +52,11 @@ function onNewPlayer(data) {
 	//newPlayer.setID(this.id);
 	newPlayer.id = this.id;
 	this.broadcast.emit("new player", {id: newPlayer.id, x: newPlayer.x, y: newPlayer.y});
-	var i, existingPlayer;
+	/*var i, existingPlayer;
 	for (i = 0; i < players.length; i++) {
 		existingPlayer = players[i];
 		this.emit("new player", {id: existingPlayer.id, x: existingPlayer.x, y: existingPlayer.y});
-	};
+	};*/
 	players.push(newPlayer);
 };
 
