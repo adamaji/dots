@@ -42,6 +42,7 @@ function onNewPlayer(data) {
 
 function onMovePlayer(data) {
 	var movePlayer = playerById(data.id);
+	console.log("IN MOVE PLAYER - CLIENT");
 	movePlayer.setX(data.x);
 	movePlayer.setY(data.y);
 	movePlayer.setXVel(data.xvel);
