@@ -14,15 +14,14 @@ function handler(req, res) {
 	var url = require('url').parse(req.url, true);
 	var target = (url.pathname == "/") ? "index.html" : url.pathname.slice(1);
 	res.writeHead(200);
-	res.end(port);
-	//res.end(fs.readFileSync(target));
+	res.end(fs.readFileSync(target));
 }
 
 //socket.emit('log', {
 //	data: ""
 //});
 
-setEventHandlers = function() {
+var setEventHandlers = function() {
 	socket.sockets.on("connection", onSocketConnection);
 };
 

@@ -1,38 +1,9 @@
 function init() {
-	// Declare the canvas and rendering context
-	canvas = document.getElementById("gameCanvas");
-	ctx = canvas.getContext("2d");
-
-	// Maximise the canvas
-	canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight;
-
-	// Initialise keyboard controls
-	keys = new Keys();
-
-	// Calculate a random start position for the local player
-	// The minus 5 (half a player size) stops the player being
-	// placed right on the egde of the screen
-	var startX = Math.round(Math.random()*(canvas.width-5)),
-		startY = Math.round(Math.random()*(canvas.height-5));
-
-	// Initialise the local player
-	localPlayer = new Player(startX, startY);
-
-	// Initialise socket connection
-	socket = io.connect("http://localhost", {port: 8000, transports: ["websocket"]});
-
-	// Initialise remote players array
-	remotePlayers = [];
-
-	// Start listening for events
+	// 43306
+	socket = io.connect("http://multipacman.herokuapp.com");
 	setEventHandlers();
 };
 
-
-/**************************************************
-** GAME EVENT HANDLERS
-**************************************************/
 var setEventHandlers = function() {
 	socket.on("connect", onSocketConnected);
 	socket.on("disconnect", onSocketDisconnect);
@@ -43,7 +14,7 @@ var setEventHandlers = function() {
 
 function onSocketConnected() {
 	console.log("Connected to socket server");
-	socket.emit("new player", {x: localPlayer.getX(), y: localPlayer.getY()});
+	socket.emit("new player", {x: player.x, y: player.y});
 };
 
 function onSocketDisconnect() {
@@ -51,29 +22,19 @@ function onSocketDisconnect() {
 };
 
 function onNewPlayer(data) {
-	console.log("New player connected: "+data.id);
-	var newPlayer = new Player(data.x, data.y);
-	newPlayer.id = data.id;
-	remotePlayers.push(newPlayer);
+	//var newPlayer = new Player(data.x, data.y);
+	//newPlayer.id = data.id;
+	//remotePlayers.push(newPlayer);
 };
 
-// Move player
 function onMovePlayer(data) {
-	var movePlayer = playerById(data.id);
-	if (!movePlayer) {
-		console.log("Player not found: "+data.id);
-		return;
-	};
-	movePlayer.setX(data.x);
-	movePlayer.setY(data.y);
+	//movePlayer.setX(data.x);
+	//movePlayer.setY(data.y);
 };
 
 function onRemovePlayer(data) {
-	var removePlayer = playerById(data.id);
-	if (!removePlayer) {
-		console.log("Player not found: "+data.id);
-		return;
-	};
-	remotePlayers.splice(remotePlayers.indexOf(removePlayer), 1);
+	//players.splice(players.indexOf(removePlayer), 1);
 };
+
+init();
 
