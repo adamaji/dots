@@ -6,14 +6,14 @@ var app = require('http').createServer(handler),
 var players = [];
 
 app.listen(port);
-
+setEventHandlers();
 io.configure(function () { 
 	io.set("transports", ["xhr-polling"]); 
 	io.set("polling duration", 10); 
 });
 
 function handler(req, res) {
-	setEventHandlers();
+	
 	var url = require('url').parse(req.url, true);
 	var target = (url.pathname == "/") ? "index.html" : url.pathname.slice(1);
 	res.writeHead(200);
@@ -32,7 +32,7 @@ var setEventHandlers = function() {
 function onSocketConnection(client) {
 	console.log(client.id);
 	client.on("disconnect", onClientDisconnect);
-	client.on("newplayer", onNewPlayer);
+	client.on("new player", onNewPlayer);
 	client.on("move player", onMovePlayer);
 };
 
